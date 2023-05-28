@@ -14,6 +14,8 @@ Original file is located at
 # nltk.download('punkt')
 # from nltk.corpus import wordnet as wn
 # import pandas as pd
+# from sklearn.metrics import accuracy_score
+# 
 # nltk.data.path.append("assets/")
 # 
 # from nltk.tokenize import word_tokenize
@@ -90,3 +92,40 @@ def document_path_similarity(doc1, doc2):
     return (similarity_score(synsets1, synsets2) + similarity_score(synsets2, synsets1)) / 2
 
 document_path_similarity("i like you",'Fish are nvqjp friends.')
+
+paraphrases = pd.read_csv('paraphrases.csv')
+paraphrases.head()
+
+def most_similar_docs():
+        
+    max_similarity = 0
+    max_pair = None
+
+    for index, row in paraphrases.iterrows():
+        similarity = document_path_similarity(row['D1'], row['D2'])
+        if similarity > max_similarity:
+            max_similarity = similarity
+            max_pair = (row['D1'], row['D2'], similarity)
+
+    return max_pair
+
+most_similar_docs()
+
+def label_accuracy():
+
+    labels = []
+    for index, row in paraphrases.iterrows():
+        similarity = document_path_similarity(row['D1'], row['D2'])
+        if similarity > 0.75:
+            labels.append(1)  # Paraphrase
+        else:
+            labels.append(0)  # Not Paraphrase
+
+
+    ground_truth_labels = paraphrases['Quality']
+
+    accuracy = accuracy_score(ground_truth_labels, labels)
+    return accuracy
+
+label_accuracy()
+
