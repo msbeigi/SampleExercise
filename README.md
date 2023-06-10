@@ -1,4 +1,4 @@
-# Requirements
+## Requirements
 To run the code for the Document Similarity scenario, you will need the following dependencies and resources:
 
 * Python 3.7 or above
@@ -22,7 +22,7 @@ Before running the code, make sure to download the necessary NLTK resources. You
   nltk.download('omw-1.4')
   nltk.download('stopwords')
 ```
-# Code description
+## Code description
 
 <div style="text-align: justify; text-indent: 20px;">
 1.  <strong>docuemnt_similarity.py </strong> :This code implements a document similarity calculation using WordNet-based synsets and path similarity. It consists of two main functions, doc_to_synsets and similarity_score, and uses provided helper functions as well.
